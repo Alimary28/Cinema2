@@ -26,7 +26,7 @@ public class Booking2 extends Entity {
     }
 
     @Override
-    public String toString() {
+    public  String toString() {
         return "Booking{" +
                 "id='" + getId() + '\'' +
                 ", movieId='" + movieId + '\'' +

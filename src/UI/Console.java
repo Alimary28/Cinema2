@@ -50,6 +50,12 @@ public class Console {
                 case "4":
                     runClientSearch();
                     break;
+                case "5":
+                    runMovieSearch();
+                    break;
+                case "6":
+                    runBookingSearch();
+                    break;
                 case "x":
                     return;
                 default:
@@ -66,6 +72,16 @@ public class Console {
             System.out.println(clientCard2);
         }
     }
+    private void runMovieSearch(){
+        System.out.println("Search by: ");
+        String search = scanner.nextLine();
+        System.out.println("Search results are: ");
+        for(Movie2 movie2 : movieService2.fullTextSearch(search)){
+            System.out.println(movie2);
+        }
+    }
+
+    private void runBookingSearch(){}
 
     private void runBookingCrud() {
         while (true) {

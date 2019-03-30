@@ -1,9 +1,11 @@
 package Service;
 
+import Domain.ClientCard2;
 import Domain.Movie2;
 import Domain.Booking2;
 import Repository.IRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookingService2 {
@@ -38,7 +40,10 @@ public class BookingService2 {
 
         Movie2 movieSold = movie2Repository.findById(movieId);
         if (movieSold == null) {
-            throw new RuntimeException("There is no movie with the given id!");
+            throw new BookingServiceException("There is no movie with the given id!");
+        }
+        if (!movieSold.isInCinema()){
+            throw new BookingServiceException("The movie is not in Cinema!");
         }
         double price = movieSold.getPrice();
         double ticketPoints = 0.0;
@@ -49,6 +54,17 @@ public class BookingService2 {
         Booking2 booking2 = new Booking2(id, movieId, clientCardId, date, hour, price, (int)ticketPoints);
         booking2Repository.upsert(booking2);
         return booking2;
+    }
+    public List<Booking2> fullTextSearch(String text) {
+        List<Booking2> found = new ArrayList<>();
+        for (Booking2 booking : booking2Repository.getAll()) {
+            // Might return false positives
+            if (booking.toString().contains(text)) {
+                found.add(booking);
+            }
+        }
+
+        return found;
     }
     public void remove(int id){
         booking2Repository.remove(id);

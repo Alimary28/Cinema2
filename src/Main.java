@@ -5,6 +5,7 @@ import Service.MovieService2;
 import Service.ClientCardService2;
 import Service.BookingService2;
 import UI.Console;
+import UI.NaturalLanguage;
 
 
 public class Main {
@@ -22,7 +23,10 @@ public class Main {
         ClientCardService2 clientCardService2 = new ClientCardService2(clientCardRepository);
         BookingService2 bookingService2 = new BookingService2(bookingRepository, movieRepository);
 
-        Console console = new Console(movieService2, clientCardService2, bookingService2);
-        console.run();
+        //Console console = new Console(movieService2, clientCardService2, bookingService2);
+        //console.run();
+
+        NaturalLanguage naturalLanguage = new NaturalLanguage(movieService2, clientCardService2, bookingService2);
+        naturalLanguage.run2();
     }
 }

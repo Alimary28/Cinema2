@@ -1,8 +1,10 @@
 package Service;
 
+import Domain.ClientCard2;
 import Domain.Movie2;
 import Repository.IRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieService2 {
@@ -28,6 +30,18 @@ public class MovieService2 {
         }
         Movie2 movie2 = new Movie2(id, year, title, price, inCinema);
         repository.upsert(movie2);
+    }
+
+    public List<Movie2> fullTextSearch(String text) {
+        List<Movie2> found = new ArrayList<>();
+        for (Movie2 movie : repository.getAll()) {
+            // Might return false positives
+            if (movie.toString().contains(text)) {
+                found.add(movie);
+            }
+        }
+
+        return found;
     }
 
     public void remove(int id) {

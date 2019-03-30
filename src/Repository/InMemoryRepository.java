@@ -37,13 +37,12 @@ public class InMemoryRepository<T extends Entity> implements IRepository<T>{
     /**
      * Removes a entity with a given id.
      * @param id the id.
-     * @throws RuntimeException if there is no entity with the given id.
+     * @throws InMemoryRepoException if there is no entity with the given id.
      */
     public void remove(int id) {
         if (!programm.containsKey(id)) {
-            // TODO: make it:
-            // throw new InMemoryRepositoryException("There is no entity with the given id to remove.");
-            throw new RuntimeException("There is no entity with the given id to remove.");
+
+            throw new InMemoryRepoException("There is no entity with the given id to remove.");
         }
 
         programm.remove(id);
